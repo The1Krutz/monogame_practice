@@ -10,4 +10,7 @@ This repository is a holding area for my personal practice projects in MonoGame.
 
 * Demo3 - Following [GFS part 3 - Input Handling](https://www.gamefromscratch.com/post/2015/06/28/MonoGame-Tutorial-Handling-Keyboard-Mouse-and-GamePad-Input.aspx)
 
+* Demo4 - Following [GFS part 4 - Audio Handling](https://www.gamefromscratch.com/post/2015/07/25/MonoGame-Tutorial-Audio.aspx)
+
+* Demo5 - Following [GFS part 5 - Intro to 3D](https://www.gamefromscratch.com/post/2015/08/20/Monogame-Tutorial-Beginning-3D-Programming.aspx)
 
