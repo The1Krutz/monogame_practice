@@ -35,8 +35,8 @@ namespace Demo4 {
     }
 
     void MediaPlayer_MediaStateChanged(object sender, System.EventArgs e) {
-      // 0.0f is silent, 0.1f is full volume
-      MediaPlayer.Volume -= 0.1f;
+      // 0.0f is silent, 1.0f is full volume
+      MediaPlayer.Volume -= 0.2f;
       MediaPlayer.Play(song);
     }
 
