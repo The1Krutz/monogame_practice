@@ -14,3 +14,6 @@ This repository is a holding area for my personal practice projects in MonoGame.
 
 * Demo5 - Following [GFS part 5 - Intro to 3D](https://www.gamefromscratch.com/post/2015/08/20/Monogame-Tutorial-Beginning-3D-Programming.aspx)
 
+* Test1_Nez - [Nez - Getting Started](https://www.youtube.com/watch?v=ZfVMCbOniV0)
+
+  * Youtube tutorial for Nez library on top of Monogame
