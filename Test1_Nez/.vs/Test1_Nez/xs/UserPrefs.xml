@@ -1,0 +1,22 @@
+﻿<Properties StartupConfiguration="{D75E95DE-85D7-4D08-9B4C-D7CB0DC87095}|Default">
+  <MonoDevelop.Ide.ItemProperties.Test1__Nez PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Test1_Nez" expanded="True">
+            <Node name="Test1_Nez" expanded="True">
+              <Node name="Nez" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

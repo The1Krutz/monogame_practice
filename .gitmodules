@@ -1,3 +1,6 @@
 [submodule "Test1_Nez/Nez"]
 	path = Test1_Nez/Nez
 	url = git@github.com:prime31/Nez.git
+[submodule "Nez-Samples"]
+	path = Nez-Samples
+	url = git@github.com:prime31/Nez-Samples.git
