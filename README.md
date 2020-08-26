@@ -15,3 +15,7 @@ This repository is a holding area for my personal practice projects in MonoGame.
 * Demo5 - Following [GFS part 5 - Intro to 3D](https://www.gamefromscratch.com/post/2015/08/20/Monogame-Tutorial-Beginning-3D-Programming.aspx)
 
 * Test1_Nez - Following [Nez - Getting Started](https://www.youtube.com/watch?v=ZfVMCbOniV0), a Youtube tutorial for Nez library on top of Monogame
+
+* mg_pong - self-made Pong clone in pure Monogame, not following any outside tutorial
+
+* nez_pong - self-made Pong clone using Nez. Uses some of the Nez sample code as a reference, but no outside tutorial
