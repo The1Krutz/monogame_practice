@@ -1,10 +1,15 @@
 ﻿<Properties StartupConfiguration="{B12D9F78-1A41-4321-9D9A-10C06C507608}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Game1.cs">
+    <Files>
+      <File FileName="Game1.cs" Line="10" Column="42" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="mg_pong" expanded="True" selected="True">
-            <Node name="mg_pong" expanded="True" />
+          <Node name="mg_pong" expanded="True">
+            <Node name="mg_pong" expanded="True">
+              <Node name="Game1.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
