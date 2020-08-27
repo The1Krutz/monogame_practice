@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,13 +9,23 @@ namespace mg_pong {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     private SpriteFont _kenneyBold;
+
     private Texture2D _headerBar;
+    private Texture2D _paddle;
+    private Texture2D _ball;
+
+    private readonly int _ballSide = 15;
+    private readonly int _paddleWidth = 5;
+    private readonly int _paddleHeight = 75;
 
     private Rectangle playableArea;
 
     private BouncyBoi leftPaddle;
     private BouncyBoi rightPaddle;
     private BouncyBoi ball;
+
+    private int leftScore;
+    private int rightScore;
 
     public Game1() {
       _graphics = new GraphicsDeviceManager(this);
@@ -31,16 +42,28 @@ namespace mg_pong {
       _graphics.ApplyChanges();
       Window.AllowUserResizing = true;
 
-      // header bar
+      // header bar texture
       _headerBar = new Texture2D(GraphicsDevice, playableArea.Width, 50);
-      Color[] colorData = new Color[playableArea.Width * 50];
-      System.Array.Fill(colorData, Color.Red);
-      _headerBar.SetData(colorData);
+      Color[] headerColor = new Color[playableArea.Width * 50];
+      Array.Fill(headerColor, Color.Red);
+      _headerBar.SetData(headerColor);
+
+      // paddle texture
+      _paddle = new Texture2D(GraphicsDevice, _paddleWidth, _paddleHeight);
+      Color[] paddleColor = new Color[_paddleWidth * _paddleHeight];
+      Array.Fill(paddleColor, Color.White);
+      _paddle.SetData(paddleColor);
+
+      // ball texture
+      _ball = new Texture2D(GraphicsDevice, _ballSide, _ballSide);
+      Color[] ballColor = new Color[_ballSide * _ballSide];
+      Array.Fill(ballColor, Color.White);
+      _ball.SetData(ballColor);
 
       // add paddles and ball
-      leftPaddle = new BouncyBoi(Vector2.Zero, Content.Load<Texture2D>("minus"), new Rectangle(playableArea.Left + 50, playableArea.Top + 50, 10, 100), Keys.W, Keys.S);
-      rightPaddle = new BouncyBoi(Vector2.Zero, Content.Load<Texture2D>("minus"), new Rectangle(playableArea.Right - 60, playableArea.Top + 50, 10, 100), Keys.Up, Keys.Down);
-      ball = new BouncyBoi(new Vector2(1000), Content.Load<Texture2D>("stop"), new Rectangle(200, 200, 30, 30));
+      leftPaddle = new BouncyBoi(Vector2.Zero, _paddle, new Rectangle(playableArea.Left + 50, playableArea.Top + 50, _paddleWidth, _paddleHeight), Keys.W, Keys.S);
+      rightPaddle = new BouncyBoi(Vector2.Zero, _paddle, new Rectangle(playableArea.Right - 60, playableArea.Top + 50, _paddleWidth, _paddleHeight), Keys.Up, Keys.Down);
+      ball = new BouncyBoi(new Vector2(1000), _ball, new Rectangle(400, 300, _ballSide, _ballSide));
 
       base.Initialize();
     }
@@ -56,26 +79,42 @@ namespace mg_pong {
       if (state.IsKeyDown(Keys.Escape))
         Exit();
 
-
+      // update positions
       leftPaddle.Update(state, gameTime);
       rightPaddle.Update(state, gameTime);
       ball.Update(state, gameTime);
 
+      // keep the ball in bounds
       if (ball.BoundingBox.Bottom >= playableArea.Bottom) {
         ball.BounceUp();
       }
       if (ball.BoundingBox.Top <= playableArea.Top) {
         ball.BounceDown();
       }
-      if (ball.BoundingBox.Right >= rightPaddle.BoundingBox.Left) {
+      if (ball.BoundingBox.Left <= playableArea.Left) {
+        rightScore++;
+        ball.BounceRight();
+        ResetBall();
+      }
+      if (ball.BoundingBox.Right >= playableArea.Right) {
+        leftScore++;
+        ball.BounceLeft();
+        ResetBall();
+      }
+
+      // handle bouncing it off paddles
+      if (ball.BoundingBox.Intersects(rightPaddle.BoundingBox)) {
         ball.BounceLeft();
       }
-      if (ball.BoundingBox.Left <= leftPaddle.BoundingBox.Right) {
+      if (ball.BoundingBox.Intersects(leftPaddle.BoundingBox)) {
         ball.BounceRight();
       }
 
-
       base.Update(gameTime);
+    }
+
+    private void ResetBall() {
+      ball.BoundingBox.Location = new Point(400, 300);
     }
 
     protected override void Draw(GameTime gameTime) {
@@ -83,7 +122,7 @@ namespace mg_pong {
 
       _spriteBatch.Begin();
       _spriteBatch.Draw(_headerBar, new Rectangle(Point.Zero, new Point(800, 50)), Color.Gray);
-      _spriteBatch.DrawString(_kenneyBold, "Header Bar", new Vector2(50, 15), Color.Black);
+      _spriteBatch.DrawString(_kenneyBold, $"{leftScore}  {rightScore}", new Vector2(400, 15), Color.Black);
       _spriteBatch.Draw(leftPaddle.Sprite, leftPaddle.BoundingBox, Color.White);
       _spriteBatch.Draw(rightPaddle.Sprite, rightPaddle.BoundingBox, Color.White);
       _spriteBatch.Draw(ball.Sprite, ball.BoundingBox, Color.White);

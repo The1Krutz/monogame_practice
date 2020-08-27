@@ -26,7 +26,7 @@ namespace mg_pong {
       upKey = upkey;
       downKey = downkey;
 
-      MaxSpeed = 200;
+      MaxSpeed = 400;
     }
 
     public void Update(KeyboardState keyMap, GameTime gameTime) {
@@ -63,13 +63,17 @@ namespace mg_pong {
         return;
       }
 
+      Vector2 impulse;
       if (keyMap.IsKeyDown(upKey)) {
-        Velocity = new Vector2(0, MaxSpeed * -1);
+        impulse = new Vector2(0, MaxSpeed * -1);
       } else if (keyMap.IsKeyDown(downKey)) {
-        Velocity = new Vector2(0, MaxSpeed);
+        impulse = new Vector2(0, MaxSpeed);
       } else {
-        Velocity = Vector2.Zero;
+        impulse = Vector2.Zero;
       }
+
+      Velocity = Vector2.Lerp(Velocity, impulse, .1f);
+
     }
   }
 }
