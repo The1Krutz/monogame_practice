@@ -1,15 +1,15 @@
 ﻿<Properties StartupConfiguration="{B12D9F78-1A41-4321-9D9A-10C06C507608}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Paddle.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Game1.cs">
     <Files>
-      <File FileName="Game1.cs" Line="9" Column="36" />
-      <File FileName="Paddle.cs" Line="3" Column="1" />
+      <File FileName="Game1.cs" Line="14" Column="5" />
+      <File FileName="Paddle.cs" Line="15" Column="5" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="mg_pong" expanded="True">
             <Node name="mg_pong" expanded="True">
-              <Node name="Paddle.cs" selected="True" />
+              <Node name="Game1.cs" selected="True" />
             </Node>
           </Node>
         </State>
