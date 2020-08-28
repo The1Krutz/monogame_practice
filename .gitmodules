@@ -1,6 +1,0 @@
-[submodule "Nez-Samples"]
-	path = Nez-Samples
-	url = git@github.com:prime31/Nez-Samples.git
-[submodule "Nez"]
-	path = Nez
-	url = git@github.com:prime31/Nez.git
