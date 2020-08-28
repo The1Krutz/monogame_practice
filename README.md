@@ -16,8 +16,6 @@ This repository is a holding area for my personal practice projects in MonoGame.
 
 * Test1_Nez - Following [Nez - Getting Started](https://www.youtube.com/watch?v=ZfVMCbOniV0), a Youtube tutorial for Nez library on top of Monogame
 
-* Nez_Samples - ([Source](https://github.com/prime31/Nez-Samples)) Included as submodule for reference purposes
-
 * mg_pong - self-made Pong clone in pure Monogame, not following any outside tutorial
 
 * nez_pong - self-made Pong clone using Nez. Uses some of the Nez sample code as a reference, but no outside tutorial
@@ -25,7 +23,5 @@ This repository is a holding area for my personal practice projects in MonoGame.
 ### Assets ###
 
 * Demo assets lifted at random from google image search
-
-* Nez Sample assets are credited in the Nez Sample project (and from what I understand are a variety of non-reusable assets), and included here only through the inclusion of Nez Samples repo
 
 * Other assets used from [Kenney Game Assets Bundle 1](https://kenney.itch.io/kenney-game-assets-1), a bundle I purchased through Itch.io. All assets in this bundle are licensed under [Creative Commons Zero](https://creativecommons.org/publicdomain/zero/1.0/).
