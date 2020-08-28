@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{B12D9F78-1A41-4321-9D9A-10C06C507608}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Game1.cs">
     <Files>
-      <File FileName="Game1.cs" Line="14" Column="5" />
-      <File FileName="Paddle.cs" Line="15" Column="5" />
+      <File FileName="Game1.cs" Line="62" Column="7" />
+      <File FileName="BouncyBoi.cs" Line="6" Column="25" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
