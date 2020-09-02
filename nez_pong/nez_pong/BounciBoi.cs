@@ -7,26 +7,36 @@ using System;
 namespace nez_pong {
     public class PongScene : Scene {
 
+        private readonly int _sceneWidth = 1280;
+        private readonly int _sceneHeight = 720;
+
         public override void Initialize() {
             base.Initialize();
 
-            SetDesignResolution(1280, 720, SceneResolutionPolicy.None);
-            Screen.SetSize(1280, 720);
+            SetDesignResolution(_sceneWidth, _sceneHeight, SceneResolutionPolicy.None);
+            Screen.SetSize(_sceneWidth, _sceneHeight);
 
             Texture2D ballTexture = Content.Load<Texture2D>("ball");
             Texture2D paddleTexture = Content.Load<Texture2D>("paddle");
 
-            float friction = 0f;
-            float elasticity = 1f;
-
             // paddle1
-            CreateEntity(new Vector2(50, 150), friction, elasticity, new Vector2(0, 0), paddleTexture);
+            CreateEntity(new Vector2(50, 150), .5f, 0, new Vector2(0, 0), paddleTexture);
             // paddle2
-            CreateEntity(new Vector2(1220, 150), friction, elasticity, new Vector2(0, 0), paddleTexture);
+            CreateEntity(new Vector2(_sceneWidth - 60, 150), .5f, 0, new Vector2(0, 0), paddleTexture);
             // ball
-            CreateEntity(new Vector2(1280 / 2, 720 / 2), friction, elasticity, new Vector2(400, 400), ballTexture);
-            // .AddImpulse(new Vector2(100, 100));
+            CreateEntity(new Vector2(_sceneWidth / 2, _sceneHeight / 2), 0, 1, new Vector2(300, 300), ballTexture);
 
+            // top and bottom bouncy walls
+            CreateEntity("bottomwall")
+                .AddComponent(new BoxCollider(0, _sceneHeight, _sceneWidth, 10f));
+            CreateEntity("topwall")
+                .AddComponent(new BoxCollider(0, -10, _sceneWidth, 10f));
+
+            // left and right point zones
+            CreateEntity("rightwall")
+                .AddComponent(new BoxCollider(_sceneWidth, 0, 10f, _sceneHeight));
+            CreateEntity("leftwall")
+                .AddComponent(new BoxCollider(-10f, 0, 10f, _sceneHeight));
 
         }
 
