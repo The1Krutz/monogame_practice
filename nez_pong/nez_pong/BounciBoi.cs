@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Nez;
 using System;
+using Microsoft.Xna.Framework.Input;
 
 namespace nez_pong {
     public class PongScene : Scene {
@@ -17,14 +18,28 @@ namespace nez_pong {
             Screen.SetSize(_sceneWidth, _sceneHeight);
 
             Texture2D ballTexture = Content.Load<Texture2D>("ball");
-            Texture2D paddleTexture = Content.Load<Texture2D>("paddle");
 
-            // paddle1
-            CreateEntity(new Vector2(50, 150), .5f, 0, new Vector2(0, 0), paddleTexture);
-            // paddle2
-            CreateEntity(new Vector2(_sceneWidth - 60, 150), .5f, 0, new Vector2(0, 0), paddleTexture);
+            // new left paddle
+            CreateEntity("leftPaddle", new Vector2(50, _sceneHeight / 2))
+                .AddComponent(new Paddle(PlayerIndex.One))
+                .AddComponent(new BoxCollider());
+
+            // new right paddle
+            CreateEntity("rightPaddle", new Vector2(_sceneWidth - 50, _sceneHeight / 2))
+                .AddComponent(new Paddle(PlayerIndex.Two))
+                .AddComponent(new BoxCollider());
+
             // ball
-            CreateEntity(new Vector2(_sceneWidth / 2, _sceneHeight / 2), 0, 1, new Vector2(300, 300), ballTexture);
+            CreateEntity("ball", new Vector2(_sceneWidth / 2, _sceneHeight / 2))
+                .AddComponent(new SpriteRenderer(ballTexture))
+                .AddComponent(new ArcadeRigidbody() {
+                    Mass = 10f,
+                    Friction = 0f,
+                    Elasticity = 1,
+                    Velocity = new Vector2(300, 300),
+                    ShouldUseGravity = false
+                })
+                .AddComponent<BoxCollider>();
 
             // top and bottom bouncy walls
             CreateEntity("bottomwall")
@@ -39,27 +54,49 @@ namespace nez_pong {
                 .AddComponent(new BoxCollider(-10f, 0, 10f, _sceneHeight));
 
         }
-
-        ArcadeRigidbody CreateEntity(Vector2 position, float friction, float elasticity, Vector2 velocity, Texture2D texture) {
-            ArcadeRigidbody rigidbody = new ArcadeRigidbody() {
-                Friction = friction,
-                Elasticity = elasticity,
-                Velocity = velocity,
-                ShouldUseGravity = false
-            };
-
-            var entity = CreateEntity(Utils.RandomString(3));
-            entity.Position = position;
-            entity.AddComponent(new SpriteRenderer(texture));
-            entity.AddComponent(rigidbody);
-            entity.AddComponent<BoxCollider>();
-
-
-            return rigidbody;
-        }
-
-
     }
 
+    public class Paddle : Component, IUpdatable {
+        public float MoveSpeed = 400;
 
+        private readonly PlayerIndex _player;
+
+        private Mover _mover;
+        private Vector2 _velocity;
+        private VirtualIntegerAxis _yAxisInput;
+
+        public Paddle(PlayerIndex player) {
+            _player = player;
+        }
+
+        public override void OnAddedToEntity() {
+            var texture = Entity.Scene.Content.Load<Texture2D>("paddle");
+            Entity.AddComponent(new SpriteRenderer(texture));
+
+            _mover = Entity.AddComponent(new Mover());
+
+            SetupInput();
+        }
+
+        public override void OnRemovedFromEntity() {
+            _yAxisInput.Deregister();
+        }
+
+        private void SetupInput() {
+            _yAxisInput = new VirtualIntegerAxis();
+            if (_player == PlayerIndex.One) {
+                _yAxisInput.Nodes.Add(new VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.TakeNewer, Keys.W, Keys.S));
+            } else if (_player == PlayerIndex.Two) {
+                _yAxisInput.Nodes.Add(new VirtualAxis.KeyboardKeys(VirtualInput.OverlapBehavior.TakeNewer, Keys.Up, Keys.Down));
+            } else {
+                throw new NotImplementedException();
+            }
+        }
+
+        void IUpdatable.Update() {
+            _velocity.Y = _yAxisInput.Value * MoveSpeed * Time.DeltaTime;
+            _mover.CalculateMovement(ref _velocity, out var res);
+            _mover.ApplyMovement(_velocity);
+        }
+    }
 }
