@@ -6,15 +6,16 @@ using Nez.Textures;
 
 namespace nez_pong {
     public class Game1 : Core {
-        public Game1() : base(width: 800,
-                              height: 600,
+        public Game1() : base(width: 1280,
+                              height: 720,
                               isFullScreen: false) {
         }
 
         protected override void Initialize() {
             base.Initialize();
 
-            // set your initial scene here
+            Window.AllowUserResizing = true;
+            Scene = new PongScene();
         }
     }
 }
