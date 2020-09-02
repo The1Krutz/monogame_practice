@@ -1,0 +1,6 @@
+# root = true
+
+[*]
+generated_code = true # my addition
+indent_style = tab
+indent_size = 4
