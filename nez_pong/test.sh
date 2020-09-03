@@ -1,0 +1,1 @@
+dotnet test nez_pong.sln

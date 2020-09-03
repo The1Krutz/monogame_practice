@@ -1,0 +1,1 @@
+dotnet build nez_pong.sln
